@@ -204,17 +204,24 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
-  /* const UpperLeftCorner = '┌';
-  const UpperRightCorner = '┐\n';
-  const BottomLeftCorner = '└';
-  const BottomRightCorner = '┘\n';
-
-  if (width <= 2 && height <= 2) {
-    return UpperLeftCorner + UpperRightCorner + BottomLeftCorner + BottomRightCorner;
+function getRectangleString(width, height) {
+  let UpperCorner = '┌';
+  let BottomCorner = '└';
+  let middle = '│';
+  for (let i = 0; i <= width - 3; i += 1) {
+    UpperCorner += '─';
+    BottomCorner += '─';
+    middle += ' ';
   }
-  */
+  UpperCorner += '┐\n';
+  BottomCorner += '┘\n';
+  middle += '│\n';
+  let result = UpperCorner;
+  for (let j = 0; j <= height - 3; j += 1) {
+    result += middle;
+  }
+  result += BottomCorner;
+  return result;
 }
 
 
@@ -234,8 +241,16 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ?!';
+  const alphabetRot13 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm ?!';
+  let strResult = '';
+
+  for (let i = 0; i < str.length; i += 1) {
+    const res = alphabet.indexOf(str[i]);
+    strResult += alphabetRot13.charAt(res);
+  }
+  return strResult;
 }
 
 /**
@@ -283,8 +298,12 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const card = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  return card.indexOf(value);
 }
 
 
