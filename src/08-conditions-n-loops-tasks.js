@@ -210,8 +210,10 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const BracketLeft = isStartIncluded ? '[' : '(';
+  const BracketRight = isEndIncluded ? ']' : ')';
+  return `${BracketLeft}${Math.min(a, b)}, ${Math.max(a, b)}${BracketRight}`;
 }
 
 
@@ -330,8 +332,18 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const bracketsConfig = ['{}', '[]', '()', '<>'];
+  let resultStr = str;
+  for (let i = 0; i < bracketsConfig.length; i += 1) {
+    while (resultStr) {
+      if (resultStr.includes(bracketsConfig[i])) {
+        resultStr = resultStr.replace(bracketsConfig[i], '');
+        i = 0;
+      } else break;
+    }
+  }
+  return !resultStr;
 }
 
 
@@ -372,8 +384,12 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const str = '';
+  const breakPathes = pathes.map((element) => element.split('/'));
+  const rotatePathes = breakPathes[0].map((element, x) => breakPathes.map((it) => it[x]));
+  const allElem = rotatePathes.filter((arr) => arr.every((element) => element === arr[0]));
+  return [...allElem, [str]].map((it) => it[0]).join('/');
 }
 
 
