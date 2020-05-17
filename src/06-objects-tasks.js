@@ -118,6 +118,11 @@ function fromJSON(proto, json) {
  */
 
 const cssSelectorBuilder = {
+  // result: [],
+  // left: [],
+  // combinators: [],
+  // previousValue: '',
+
   element(/* value */) {
     throw new Error('Not implemented');
   },
